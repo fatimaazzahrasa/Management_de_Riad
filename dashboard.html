@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+
+<body>
+
+
+    <div id="navbar"></div>
+    <div id="sidebar"></div>
+
+    <div class="main-content">
+
+        <h1>Tableau de bord</h1>
+
+        <div class="kpis">
+
+            <div class="card">
+                <h3>Nombre de chambres</h3>
+                <p id="roomsCount">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Nombre de clients</h3>
+                <p id="clientsCount">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Nombre de réservations</h3>
+                <p id="reservationsCount">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Revenus</h3>
+                <p id="income">0 DH</p>
+            </div>
+
+        </div>
+
+        <div class="charts">
+            <canvas id="chartBar"></canvas>
+            <canvas id="chartPie"></canvas>
+        </div>
+
+    </div> 
+
+    <script src="assets/js/loadNav.js"></script>
+    <script src="libs/chart.min.js"></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/charts.js"></script>
+
+</body>
+</html>
+

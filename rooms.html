@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Chambres</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <h1>Gestion des chambres</h1>
+<button type="button" onclick="showAddForm()">Ajouter une chambre</button>
+
+<input type="text" id="search" placeholder="Recherche..." onkeyup="renderRooms()">
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Numéro de chambre</th>
+            <th>Prix</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="roomsTable"></tbody>
+</table>
+
+<div id="formBox" style="display:none;">
+    <h3>Chambre</h3>
+    <input id="roomNumber" placeholder="Numéro de chambre">
+    <input id="roomPrice" placeholder="Prix">
+    <select id="roomStatus">
+        <option value="available">Disponible</option>
+        <option value="occupied">Occupée</option>
+    </select>
+    <button type="button" onclick="saveRoom()">Enregistrer</button>
+    <button type="button" onclick="hideForm()">Annuler</button>
+</div>
+
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/rooms.js"></script>

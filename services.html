@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Services</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <h1>Services</h1>
+
+    <button type="button" onclick="showForm()">Ajouter un service</button>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="servicesTable"></tbody>
+    </table>
+
+    <div id="form" style="display:none;">
+        <input id="serviceName" placeholder="Nom du service" required>
+        <input id="servicePrice" placeholder="Prix" required>
+
+        <button type="button" onclick="saveService()">Enregistrer</button>
+        <button type="button" onclick="hideForm()">Annuler</button>
+    </div>
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/services.js"></script>
+    </body>
+    </html>
