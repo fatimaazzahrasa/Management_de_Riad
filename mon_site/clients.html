@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Clients</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<h1>Clients</h1>
+
+<button type="button" onclick="showForm()">Ajouter un client</button>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Téléphone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="clientsTable"></tbody>
+</table>
+
+<div id="form" style="display:none; margin-top:15px;">
+  <label>Nom</label><br>
+  <input type="text" id="clientName"><br><br>
+
+  <label>Téléphone</label><br>
+  <input type="text" id="clientPhone"><br><br>
+
+  <button type="button" onclick="saveClient()">Enregistrer</button>
+  <button type="button" onclick="hideForm()">Annuler</button>
+</div>
+
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/clients.js"></script>
+</body>
+</html>

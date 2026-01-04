@@ -1,0 +1,53 @@
+body {
+    background: #eef1f6;
+}
+
+h1 {
+    margin-top: 20px;
+    color: #222;
+}
+
+.kpis {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 14px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+    color: #555;
+}
+
+.card p {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.charts {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+canvas {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

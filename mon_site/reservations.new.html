@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Nouvelle Réservation</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<h1>Ajouter une réservation</h1>
+
+<label>Client</label>
+<select id="client"></select>
+
+<label>Chambre</label>
+<select id="room"></select>
+
+<label>Date de début</label>
+<input type="date" id="start">
+
+<label>Date de fin</label>
+<input type="date" id="end">
+
+<h3>Total : <span id="total">0</span> DH</h3>
+
+<button type="button" onclick="saveReservation()">Enregistrer</button>
+
+<script src="assets/js/stroge.js"></script>
+<script src="assets/js/reservation.js"></script>
+
+<script>
+  
+  const roomSelect = document.getElementById("room");
+  const totalSpan = document.getElementById("total");
+
+  roomSelect.addEventListener("change", () => {
+    const roomId = Number(roomSelect.value);
+    const room = storage.getRooms().find(r => r.id === roomId);
+    totalSpan.innerText = room ? room.price : 0;
+  });
+</script>
+
+</body>
+</html>
+
