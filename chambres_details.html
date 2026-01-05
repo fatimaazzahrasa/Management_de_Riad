@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Détails de la Chambre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- ✅ إضافة مكتبة html2pdf.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <div class="main-layout" style="display: flex">
+        <div id="sidebar-container"></div>
+        <div class="content" id="content">
+            <main>
+                <div class="page-header">
+                    <h1>Détails de la Chambre</h1>
+                    <div>
+                        <!-- ✅ زر العودة وزر تصدير PDF -->
+                        <a href="chambres.html" class="cancel-btn"><i class="fa fa-arrow-left"></i> Retour</a>
+                        <button class="add-btn" id="export-pdf-btn"><i class="fa fa-file-pdf"></i> Exporter en PDF</button>
+                    </div>
+                </div>
+
+                <!-- ✅ الحاوية التي سيتم تصديرها -->
+                <div class="details-card" id="room-details-card">
+                    <!-- سيتم ملء هذه المنطقة بواسطة JavaScript -->
+                </div>
+            </main>
+            <div id="footer-container"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/base.js" defer></script>
+    <script src="assets/js/storage.js"></script>
+    <!-- ✅ ملف جافاسكريبت جديد خاص بهذه الصفحة -->
+    <script src="assets/js/chambers_details.js"></script>
+</body>
+</html>

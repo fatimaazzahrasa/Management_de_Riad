@@ -1,0 +1,667 @@
+:root {
+    --primary-brown: #8b4513;    /* البني الغامق المستعمل في الخلفيات */
+    --light-brown: #a0522d;      /* بني فاتح للأزرار */
+    --gold-text: #c5a059;        /* الذهبي المستعمل في العناوين */
+    --cream-bg: #fdf5e6;         /* خلفية كريمية فاتحة */
+    --dark-sidebar: #5e2a01;     /* بني محروق للسايدبار */
+    --white: #ffffff;
+}
+/* الألوان ملي كيتفعل الـ Dark Mode */
+body.dark-mode {
+    --cream-bg: #1a1613;        /* بني غامق جداً قريب للأسود (الخلفية) */
+    --dark-sidebar: #2d241e;    /* بني دافئ (السايدبار والنافبار) */
+    --white: #3d3129;           /* لون الصناديق والبطاقات */
+    --primary-brown: #d1bfa7;   /* لون النصوص كيبقى كريمي/بني فاتح */
+    --gold-text: #e6b966;       /* ذهبي مشرق وأنيق */
+    --text-color: #fdf5e6;      /* لون النصوص الأساسية */
+}
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+}
+body {
+     display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--cream-bg);
+    overflow-x: hidden; /* يمنع التزعزع الجانبي */
+    overscroll-behavior-x: none;
+}
+.main-layout {
+    display: flex;
+    flex: 1; 
+    width: 100%;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    color: var(--primary-brown);
+}
+
+button {
+    padding: 8px 55px;
+    background: var(--light-brown);
+    color: var(--white);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+     margin: 10px auto;
+     display: block;
+     font-size: 15px;
+     transition: 0.3s;
+}
+
+button:hover {
+    background: var(--primary-brown);
+}
+
+input, select {
+    width: 95%;
+    padding: 8px;
+    margin: 6px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    color: #555;
+    outline: none; /* لإلغاء الإطار الأزرق الافتراضي */
+    transition: 0.3s;
+}
+input:focus, select:focus {
+    border-color: var(--primary-brown); /* يتغير الإطار للون البني المستخرج من الصورة */
+    box-shadow: 0 0 5px rgba(139, 69, 19, 0.2); /* ظل بني خفيف جداً */
+}
+
+/* ===========================
+   LOGIN PAGE
+=========================== */
+
+.login-container {
+    width: 350px;
+    background: #fff;
+    padding: 20px 20px;
+    margin: auto;
+    margin-top: 120px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-top: 5px solid var(--primary-brown);
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    text-align: center;
+}
+#title {
+  margin: 10px 0 30px 0;
+  font-size: 28px;
+  color: var(--primary-brown); /* تغيير اللون للبني الدافئ بدلاً من الأسود */
+  font-family: 'Playfair Display', serif; /* اختيار خط كلاسيكي يناسب عناوين الرياض */
+  text-align: center;
+}
+
+#labelEmail , #labelPass , #labelLang{
+    margin: 10px;
+     font-size: 14px;
+    color: #555;
+}
+option{
+    color: #2e2e2e;
+    
+}
+/* ==========Sidebar css=========== */
+/* ========== Sidebar Base Styles =========== */
+.sidebar {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    width: 220px;
+    background: var(--dark-sidebar);
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    border-right: 1px solid rgba(197, 160, 89, 0.2);
+    overflow-x: hidden; /* يمنع ظهور شريط التمرير العرضي عند التصغير */
+}
+
+.navbar-nav {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #d1bfa7;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin: 5px 12px;
+    border-radius: 8px;
+    white-space: nowrap; /* يمنع النص من النزول لسطر جديد */
+}
+
+/* حالة النشاط و الحوم (Hover) */
+.navbar-nav a:hover, 
+.navbar-nav a.active {
+    background: rgba(160, 82, 45, 0.3);
+    color: var(--white);
+    border-left: 3px solid var(--gold-text);
+}
+
+.navbar-nav a i {
+    min-width: 25px; /* يضمن بقاء الأيقونة في مكانها */
+    font-size: 1.2rem;
+    color: var(--gold-text);
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ========== Collapsed State (عند التصغير) =========== */
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar.collapsed .navbar-nav a {
+    justify-content: center;
+    padding: 12px 0;
+    margin: 5px 8px;
+}
+
+.sidebar.collapsed .navbar-nav a span,
+.sidebar.collapsed .sidebar-header {
+    display: none; /* إخفاء النص والهيدر تماماً */
+}
+
+.sidebar.collapsed .navbar-nav a i {
+    margin-right: 0; /* توسيط الأيقونة */
+}
+
+/* ========== Content Layout Adjustments =========== */
+.content {
+    flex: 1;
+    margin-top: 50px;
+    margin-left: 220px; /* يتطابق مع عرض السايدبار */
+    min-height: calc(100vh - 50px);
+    background-color: var(--cream-bg);
+    display: flex;
+    flex-direction: column;
+    transition: 0.4s;
+}
+
+.content.expanded {
+    margin-left: 70px; /* يتطابق مع عرض السايدبار المصغر */
+}
+
+/* Responsive for Mobile */
+@media(max-width: 992px) {
+    .sidebar { margin-left: -220px; }
+    .sidebar.open { margin-left: 0; }
+    .content { margin-left: 0; }
+    .content.expanded { margin-left: 0; }
+}
+/* =========End=Sidebar css=========== */
+/* ================Content Start css========== */
+main {
+    flex: 1; /* هادي أهم حاجة باش الفوتر يبق لتدت ديما */
+    padding: 20px;
+}
+/* ============= Top Navbar Start ============ */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background-color: var(--dark-sidebar);
+    padding: 0 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background 0.3s ease;
+}
+
+/* الجهة اليسرى: اللوجو وزر التحكم */
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-logo-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-text);
+    object-fit: cover;
+    background: var(--cream-bg)!important;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+body.dark-mode .nav-logo-img {
+    border-color: #e6b966; /* كيولي الإطار ذهبي مشرق أكثر */
+    filter: brightness(1.1); /* كيزيد يضوي الصورة شوية */
+}
+.toggler {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gold-text);
+    color: var(--primary-brown);
+    border-radius: 50%;
+    text-decoration: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.toggler:hover {
+    transform: scale(1.1);
+    background: var(--white);
+}
+
+/* الجهة اليمنى: الإعدادات والبروفايل */
+.right-top-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* مسافة متناسقة بين العناصر */
+}
+
+/* زر التبديل للوضع الليلي (Dark Mode Toggle) */
+.mode-icon-btn {
+    color: var(--gold-text);
+    font-size: 18px;
+    text-decoration: none !important;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mode-icon-btn:hover {
+    background: rgba(197, 160, 89, 0.1);
+    color: var(--white);
+}
+
+.nav-lang-select {
+    padding: 2px 5px;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--gold-text);
+    outline: none;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.nav-lang-select option {
+    background: var(--dark-sidebar);
+    color: var(--white);
+}
+
+.username {
+    color: var(--gold-text);
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0 5px;
+}
+
+/* أيقونة Logout والتنسيق النهائي */
+.logout-link {
+    color: var(--white) !important;
+    text-decoration: none !important;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.logout-link:hover {
+    color: var(--gold-text) !important;
+    background: rgba(197, 160, 89, 0.1);
+}
+
+.logout-link i {
+    color: var(--gold-text);
+    font-size: 16px;
+}
+
+/* ============= Responsive Parts ============ */
+
+/* تحسينات للشاشات الصغيرة (التابليت والهواتف) */
+@media(max-width: 768px) {
+    .username {
+        display: none; /* إخفاء الإسم في الهاتف لتوفير مساحة */
+    }
+    
+    .logout-link span {
+        display: none; /* إخفاء كلمة Déconnexion وترك الأيقونة فقط */
+    }
+
+    .right-top-nav {
+        gap: 8px;
+    }
+}
+
+@media(max-width: 480px) {
+    .nav-lang-select {
+        padding: 1px 3px;
+        font-size: 11px;
+    }
+}
+/* ============= Top Navbar End ============ */
+/* footer section Start */
+footer {
+    width: 100%; /* يشد العرض كامل ديال الـ content اللي هو فيه */
+    background-color: var(--dark-sidebar);
+    margin-top: auto; /* هادي هي اللي كتدفع الفوتر ديما لتحت كاع */
+   border-top: 1px solid rgba(197, 160, 89, 0.2);
+    z-index: 10;
+}
+
+footer .copy-right {
+    padding: 15px;
+    text-align: center;
+    color: var(--cream-bg);
+    font-size: 14px;
+}
+
+footer .copy-right a {
+    text-decoration: none;
+    color: var(--white);
+    /* font-size: 16px; */
+    font-weight: 600;
+}
+/* footer section End */
+/* ================Chambre css========== */
+/* تنسيق الجدول */
+.table-responsive {
+    background: var(--white); /* كيتغير تلقائياً فـ Dark Mode */
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(197, 160, 89, 0.1);
+    transition: background 0.3s ease;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: separate; /* باش نقدرو نديرو Border Radius للأسطر */
+    border-spacing: 0 8px; /* مسافة بسيطة بين الأسطر كتخلي الجدول "يتنفس" */
+}
+
+.custom-table th {
+  background: var(--dark-sidebar);
+    color: var(--gold-text);
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border: none;
+}
+/* تدوير الزوايا ديال الهيدر */
+.custom-table th:first-child { 
+    border-radius: 10px 0 0 10px; 
+}
+.custom-table th:last-child {
+     border-radius: 0 10px 10px 0;
+}
+.custom-table td {
+   padding: 15px;
+    background: rgba(197, 160, 89, 0.03); /* خلفية خفيفة بزاف لكل سطر */
+    color: var(--primary-brown);
+    font-size: 0.95rem;
+    border-top: 1px solid rgba(197, 160, 89, 0.05);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.05);
+}
+/* تدوير الزوايا ديال الأسطر */
+.custom-table td:first-child {
+     border-left: 1px solid rgba(197, 160, 89, 0.1);
+      border-radius: 10px 0 0 10px; 
+    }
+.custom-table td:last-child { 
+    border-right: 1px solid rgba(197, 160, 89, 0.1);
+     border-radius: 0 10px 10px 0; 
+    }
+/* تأثير عند تمرير الفأرة فوق السطر */
+.custom-table tr:hover td {
+    background: rgba(197, 160, 89, 0.1);
+    transform: translateY(-1px);
+    transition: 0.2s;
+}
+/* تنسيق الأزرار داخل الجدول (Actions) */
+.icon-btn {
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    margin: 0 4px;
+    transition: 0.3s;
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.edit-btn { color: #2980b9; background: rgba(41, 128, 185, 0.1); }
+.edit-btn:hover { background: #2980b9; color: white; }
+
+.delete-btn { color: #c0392b; background: rgba(192, 57, 43, 0.1); }
+.delete-btn:hover { background: #c0392b; color: white; }
+
+.icon-btn.fa-eye, a.icon-btn { color: var(--gold-text); background: rgba(197, 160, 89, 0.1); }
+.icon-btn.fa-eye:hover, a.icon-btn:hover { background: var(--gold-text); color: white; }
+
+/* ================ Pagination Styling ============ */
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    padding-bottom: 20px;
+}
+
+.pagination-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.pagination-controls button {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    margin: 0; /* مسح المارجن الافتراضي ديال الأزرار */
+    background: var(--white);
+    color: var(--primary-brown);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background: var(--gold-text);
+    color: white;
+    border-color: var(--gold-text);
+}
+
+.pagination-controls button.active {
+    background: var(--dark-sidebar);
+    color: var(--gold-text);
+    border-color: var(--gold-text);
+    font-weight: bold;
+}
+
+.pagination-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+/* تنسيق البحث */
+.search-container {
+    position: relative;
+    margin: 20px 0;
+}
+
+.search-container i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold-text);
+}
+
+.search-container input {
+    padding-left: 40px !important;
+}
+
+/* تنسيق الـ Form (Modal) */
+.modal-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.form-content {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 15px;
+    width: 400px;
+    border-top: 5px solid var(--gold-text);
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.save-btn { background: var(--gold-text) !important; color: white; flex: 1; }
+.cancel-btn { background: #e74c3c !important; color: white; flex: 1; }
+
+/* Status Styles */
+.status-available { color: #27ae60; font-weight: bold; }
+.status-occupied { color: #e67e22; font-weight: bold; }
+/* ================ Chambre Details Page ============ */
+
+/* الحاوية الرئيسية */
+.details-card {
+    background: var(--white); /* كيتغير حسب المود */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    max-width: 950px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    border-top: 5px solid var(--gold-text);
+}
+
+/* ستايل الصور */
+.room-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.main-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid var(--gold-text);
+}
+
+.sub-imgs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.sub-imgs img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s transform;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.sub-imgs img:hover {
+    transform: scale(1.05);
+    border-color: var(--gold-text);
+}
+
+/* ستايل المعلومات */
+.room-info-content h2 {
+    color: var(--gold-text);
+    text-align: left;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    padding-bottom: 10px;
+}
+
+.info-item {
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+    color: var(--primary-brown);
+    display: flex;
+    align-items: center;
+}
+
+.info-item i {
+    color: var(--gold-text);
+    width: 35px;
+    font-size: 1.3rem;
+}
+
+/* ستايل الحالة (Status) داخل التفاصيل */
+.details-card .status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+
+.status.available { background: #27ae6022; color: #27ae60; border: 1px solid #27ae60; }
+.status.occupied { background: #e67e2222; color: #e67e22; border: 1px solid #e67e22; }
+
+/* Responsive */
+@media (max-width: 850px) {
+    .details-card {
+        grid-template-columns: 1fr;
+        margin: 15px;
+    }
+    .main-img { height: 250px; }
+}

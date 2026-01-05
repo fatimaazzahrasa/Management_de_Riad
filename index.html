@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Riad Management</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="login-container">
+
+        <h2 id="title">Connexion</h2>
+
+        <label id="labelEmail">Adresse e-mail</label>
+        <input type="email" id="email" placeholder="example@mail.com">
+
+        <label id="labelPass">Mot de passe</label>
+        <input type="password" id="password">
+
+        <label id="labelLang">Langue</label>
+        <select id="lang">
+            <option value="ar">العربية</option>
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+        </select>
+
+        <button id="btnLogin">Se connecter</button>
+
+        <p id="errorMsg" class="error" style="display:none;">
+            E-mail ou mot de passe incorrect
+        </p>
+
+    </div>
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/i18n.js"></script>
+
+</body>
+</html>

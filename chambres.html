@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Gestion des chambres</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <div class="main-layout" style="display: flex">
+        <div id="sidebar-container"></div>
+        <div class="content" id="content">
+            <main>
+                <div class="page-header">
+                    <h1>Gestion des chambres</h1>
+                    <button class="add-btn" type="button" id="add-room-btn">
+                        <i class="fa fa-plus"></i> Ajouter une chambre
+                    </button>
+                </div>
+
+                <div class="search-container">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="search" placeholder="Rechercher par numéro..." />
+                </div>
+
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Numéro de chambre</th>
+                                <th>Prix (DH)</th>
+                                <th>Statut</th>
+                                <th style="text-align: center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roomsTable">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination-container">
+                    <div class="pagination-controls" id="pagination-controls">
+                        </div>
+                </div>
+
+                <div id="formBox" class="modal-form" style="display: none">
+                    <div class="form-content">
+                        <h3>Détails de la Chambre</h3>
+                        <label>Numéro de chambre</label>
+                        <input id="roomNumber" type="text" placeholder="Ex: 101" />
+
+                        <label>Prix par nuit</label>
+                        <input id="roomPrice" type="number" placeholder="Ex: 500" />
+
+                        <label>État de disponibilité</label>
+                        <select id="roomStatus">
+                            <option value="available">Disponible</option>
+                            <option value="occupied">Occupée</option>
+                        </select>
+
+                        <div class="form-actions">
+                            <button class="save-btn" type="button" id="save-btn">Enregistrer</button>
+                            <button class="cancel-btn" type="button" id="cancel-btn">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div id="footer-container"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/base.js" defer></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/chambres.js"></script>
+</body>
+</html>
