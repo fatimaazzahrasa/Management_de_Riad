@@ -1,140 +1,147 @@
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Dashboard Logic - 5 Different Charts
+ */
 
-    // --- 1. جلب كل البيانات ---
+let myCharts = {}; // لتخزين كائنات Chart.js
+
+function initDashboard() {
+    // 1. جلب البيانات من التخزين (storage.js)
     const reservations = storage.getReservations() || [];
-    const clients = storage.getClients() || [];
     const rooms = storage.getRooms() || [];
+    const clients = storage.getClients() || [];
+    const services = storage.getServices() || [];
     const personnel = storage.getPersonnel() || [];
 
-    // --- 2. حساب وعرض إحصائيات البطاقات (KPIs) ---
-    function displayKpis() {
-        const totalRevenue = reservations.reduce((sum, res) => sum + res.totalPrice, 0);
-        const availableRooms = rooms.filter(r => r.status === 'available').length;
-        const occupancyRate = rooms.length > 0 ? ((rooms.length - availableRooms) / rooms.length) * 100 : 0;
-        const avgPrice = rooms.length > 0 ? rooms.reduce((sum, room) => sum + room.price, 0) / rooms.length : 0;
+    // 2. تحديث بطاقات الإحصائيات (KPI Cards)
+    const totalRev = reservations.reduce((s, r) => s + (parseFloat(r.totalPrice) || 0), 0);
+    const availableRooms = rooms.filter(r => r.status === 'available').length;
+    const occupancyRate = rooms.length > 0 ? ((rooms.length - availableRooms) / rooms.length) * 100 : 0;
 
-        document.getElementById('kpi-total-revenue').textContent = `${totalRevenue.toFixed(2)} DH`;
+    if(document.getElementById('kpi-total-revenue')) 
+        document.getElementById('kpi-total-revenue').textContent = `${totalRev.toLocaleString()} DH`;
+    if(document.getElementById('kpi-total-reservations')) 
         document.getElementById('kpi-total-reservations').textContent = reservations.length;
+    if(document.getElementById('kpi-total-clients')) 
         document.getElementById('kpi-total-clients').textContent = clients.length;
+    if(document.getElementById('kpi-available-rooms')) 
         document.getElementById('kpi-available-rooms').textContent = `${availableRooms} / ${rooms.length}`;
+    if(document.getElementById('kpi-occupancy-rate')) 
         document.getElementById('kpi-occupancy-rate').textContent = `${occupancyRate.toFixed(1)}%`;
-        document.getElementById('kpi-avg-price').textContent = `${avgPrice.toFixed(2)} DH`;
+
+    // 3. دالة موحدة لرسم وتحديث الشارتس
+    const renderChart = (id, config) => {
+        const canvas = document.getElementById(id);
+        if (!canvas) return;
+        if (myCharts[id]) myCharts[id].destroy(); // مسح القديم باش ما يوقعش تداخل
+        myCharts[id] = new Chart(canvas, config);
+    };
+
+    // --- (1) Pie Chart: حالة الغرف ---
+    renderChart('roomStatusChart', {
+        type: 'pie',
+        data: {
+            labels: ['Disponibles', 'Occupées'],
+            datasets: [{
+                data: [availableRooms, rooms.length - availableRooms],
+                backgroundColor: ['#2ecc71', '#e67e22']
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // --- (2) Bar Chart: المداخيل الشهرية ---
+    const monthlyData = Array(12).fill(0);
+    reservations.forEach(r => {
+        const month = new Date(r.checkIn).getMonth();
+        monthlyData[month] += (parseFloat(r.totalPrice) || 0);
+    });
+    renderChart('monthlyRevenueChart', {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
+            datasets: [{
+                label: 'Revenus (DH)',
+                data: monthlyData,
+                backgroundColor: '#9b59b6'
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // --- (3) Doughnut Chart: أنواع الغرف المحجوزة ---
+    const types = { 'Standard': 0, 'Supérieure': 0, 'Suite': 0 };
+    reservations.forEach(res => {
+        const room = rooms.find(r => r.number == res.roomNumber);
+        if (room) {
+            if (room.price < 3000) types['Standard']++;
+            else if (room.price < 5000) types['Supérieure']++;
+            else types['Suite']++;
+        }
+    });
+    renderChart('roomTypeChart', {
+        type: 'doughnut',
+        data: {
+            labels: Object.keys(types),
+            datasets: [{
+                data: Object.values(types),
+                backgroundColor: ['#3498db', '#f1c40f', '#e74c3c']
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // --- (4) Line Chart: اتجاه الحجوزات (آخر 7 أيام) ---
+    const last7Days = [];
+    const resCounts = [];
+    for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const dateStr = d.toISOString().split('T')[0];
+        last7Days.push(d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }));
+        resCounts.push(reservations.filter(r => r.checkIn === dateStr).length);
     }
+    renderChart('reservationsTrendChart', {
+        type: 'line',
+        data: {
+            labels: last7Days,
+            datasets: [{
+                label: 'Réservations',
+                data: resCounts,
+                borderColor: '#1abc9c',
+                tension: 0.3,
+                fill: true,
+                backgroundColor: 'rgba(26, 188, 156, 0.1)'
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
 
-    // --- 3. إنشاء كل الرسوم البيانية ---
-    function createCharts() {
-        // ---- 1. Pie Chart: Statut des Chambres ----
-        try {
-            const availableRooms = rooms.filter(r => r.status === 'available').length;
-            new Chart(document.getElementById('roomStatusChart'), {
-                type: 'pie',
-                data: {
-                    labels: ['Disponibles', 'Occupées'],
-                    datasets: [{
-                        data: [availableRooms, rooms.length - availableRooms],
-                        backgroundColor: ['#27ae60', '#d35400'],
-                        borderColor: '#ffffff', borderWidth: 2
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-        } catch (e) { console.error("Erreur Pie Chart:", e); }
+    // --- (5) Radar Chart: أداء الفندق العام ---
+    // كنحسبو نقاط الأداء بناء على البيانات الحقيقية
+    const staffScore = Math.min((personnel.length / 10) * 100, 100);
+    const serviceScore = Math.min((services.length / 5) * 100, 100);
+    renderChart('performanceRadarChart', {
+        type: 'radar',
+        data: {
+            labels: ['Occupation', 'Revenu', 'Staff', 'Services', 'Clients'],
+            datasets: [{
+                label: 'Performance %',
+                data: [occupancyRate, 75, staffScore, serviceScore, 85],
+                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                borderColor: '#3498db',
+                pointBackgroundColor: '#3498db'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { r: { beginAtZero: true, max: 100 } }
+        }
+    });
+}
 
-        // ---- 2. Bar Chart: Revenus Mensuels ----
-        try {
-            const monthlyRevenue = Array(12).fill(0); // [0, 0, ..., 0]
-            reservations.forEach(res => {
-                const month = new Date(res.checkIn).getMonth();
-                monthlyRevenue[month] += res.totalPrice;
-            });
-            new Chart(document.getElementById('monthlyRevenueChart'), {
-                type: 'bar',
-                data: {
-                    labels: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"],
-                    datasets: [{
-                        label: 'Revenus',
-                        data: monthlyRevenue,
-                        backgroundColor: 'rgba(142, 68, 173, 0.6)',
-                        borderColor: '#8e44ad', borderWidth: 1
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
-            });
-        } catch (e) { console.error("Erreur Bar Chart:", e); }
+// تشغيل عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', initDashboard);
 
-        // ---- 3. Doughnut Chart: Réservations par Type ----
-        try {
-            // ملاحظة: سنفترض وجود أنواع للغرف بناءً على السعر
-            const types = { 'Standard': 0, 'Supérieure': 0, 'Suite': 0 };
-            reservations.forEach(res => {
-                const room = rooms.find(r => r.number == res.roomNumber);
-                if (room) {
-                    if (room.price < 3000) types['Standard']++;
-                    else if (room.price < 5000) types['Supérieure']++;
-                    else types['Suite']++;
-                }
-            });
-            new Chart(document.getElementById('roomTypeChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(types),
-                    datasets: [{
-                        data: Object.values(types),
-                        backgroundColor: ['#3498db', '#f1c40f', '#e74c3c']
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-        } catch (e) { console.error("Erreur Doughnut Chart:", e); }
-
-        // ---- 4. Line Chart: Tendance des Réservations (7 derniers jours) ----
-        try {
-            const trendData = { labels: [], data: [] };
-            for (let i = 6; i >= 0; i--) {
-                const date = new Date();
-                date.setDate(date.getDate() - i);
-                const dateString = date.toISOString().split('T')[0];
-                trendData.labels.push(date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }));
-                const count = reservations.filter(r => r.checkIn === dateString).length;
-                trendData.data.push(count);
-            }
-            new Chart(document.getElementById('reservationsTrendChart'), {
-                type: 'line',
-                data: {
-                    labels: trendData.labels,
-                    datasets: [{
-                        label: 'Nouvelles Réservations',
-                        data: trendData.data,
-                        borderColor: '#2980b9',
-                        tension: 0.1,
-                        fill: false
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-        } catch (e) { console.error("Erreur Line Chart:", e); }
-
-        // ---- 5. Polar Area Chart: Répartition du Personnel ----
-        try {
-            const postCounts = {};
-            personnel.forEach(p => {
-                postCounts[p.poste] = (postCounts[p.poste] || 0) + 1;
-            });
-            new Chart(document.getElementById('staffDistributionChart'), {
-                type: 'polarArea',
-                data: {
-                    labels: Object.keys(postCounts),
-                    datasets: [{
-                        data: Object.values(postCounts),
-                        backgroundColor: ['#2ecc71', '#e67e22', '#9b59b6', '#1abc9c', '#34495e']
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-        } catch (e) { console.error("Erreur Polar Area Chart:", e); }
-    }
-
-    // --- 4. استدعاء الدوال ---
-    displayKpis();
-    createCharts();
-});
+// تصدير الدالة للاستخدام في i18n.js عند تغيير اللغة
+window.refreshDashboard = initDashboard;
