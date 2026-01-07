@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <!-- CSS Files -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+
+    <div class="main-layout" style="display: flex;">
+        <div id="sidebar-container"></div>
+        
+        <div class="content" id="content">
+            <main>
+                <!-- ================= START: Page Header ================= -->
+                <div class="page-header">
+                    <h1>Gestion du Personnel</h1>
+                    <button class="add-btn" type="button" id="add-personnel-btn">
+                        <i class="fa fa-plus"></i> Ajouter un membre
+                    </button>
+                </div>
+                <!-- ================= END: Page Header ================= -->
+
+                <!-- ================= START: Search Bar ================= -->
+                <div class="search-container">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="searchPersonnel" placeholder="Rechercher par nom..." />
+                </div>
+                <!-- ================= END: Search Bar ================= -->
+
+                <!-- ================= START: Table ================= -->
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Nom Complet</th>
+                                <th>Poste</th>
+                                <th>Téléphone</th>
+                                <th>Statut</th>
+                                <th style="text-align: center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="personnelTable">
+                            <!-- سيتم ملء الصفوف هنا بواسطة JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- ================= END: Table ================= -->
+
+                <!-- ================= START: Modal Form for Add/Edit ================= -->
+                <div id="formBoxPersonnel" class="modal-form" style="display: none;">
+                    <div class="form-content">
+                        <h3 id="personnelFormTitle">Détails du Membre</h3>
+                        <input type="hidden" id="personnelId">
+                        
+                        <label>Nom</label>
+                        <input id="personnelNom" type="text" placeholder="Ex: El Amrani" />
+                        
+                        <label>Prénom</label>
+                        <input id="personnelPrenom" type="text" placeholder="Ex: Fatima Zahra" />
+
+                        <label>CIN</label>
+                        <input id="personnelCIN" type="text" placeholder="Ex: AB123456" />
+
+                        <label>Poste</label>
+                        <select id="personnelPoste">
+                            <option value="Réception">Réception</option>
+                            <option value="Ménage">Ménage</option>
+                            <option value="Cuisine">Cuisine</option>
+                            <option value="Sécurité">Sécurité</option>
+                            <option value="Manager">Manager</option>
+                        </select>
+                        
+                        <label>Téléphone</label>
+                        <input id="personnelTelephone" type="tel" placeholder="Ex: 0612345678" />
+                        
+                        <label>Email</label>
+                        <input id="personnelEmail" type="email" placeholder="Ex: nom@email.com" />
+
+                        <label>Date d'embauche</label>
+                        <input id="personnelDateEmbauche" type="date" />
+                        
+                        <label>Statut</label>
+                        <select id="personnelStatut">
+                            <option value="actif">Actif</option>
+                            <option value="inactif">Inactif</option>
+                        </select>
+
+                        <div class="form-actions">
+                            <button class="save-btn" type="button" id="save-personnel-btn">Enregistrer</button>
+                            <button class="cancel-btn" type="button" id="cancel-personnel-btn">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ================= END: Modal Form ================= -->
+
+            </main>
+            <div id="footer-container"></div>
+        </div>
+    </div>
+  
+<!-- JavaScript Files -->
+    <script src="assets/js/base.js" defer></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/personnel.js"></script>
+  </body>
+</html>

@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. جلب العناصر
     const roomsTable = document.getElementById('roomsTable');

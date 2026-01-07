@@ -665,3 +665,350 @@ footer .copy-right a {
     }
     .main-img { height: 250px; }
 }
+/* ================ End Chambre css========== */
+/* ===========================reservation details css=================== */
+/* --- Invoice Design (Détails Réservation) --- */
+.details-card {
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    max-width: 900px;
+    margin: 30px auto;
+    border: 1px solid #eee;
+    color: #333;
+}
+
+/* Header: Logo and Address */
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 25px;
+    margin-bottom: 40px;
+}
+
+.brand h2 {
+    margin: 0;
+    font-size: 26px;
+    color: #2c3e50;
+    letter-spacing: 1px;
+}
+
+.company-info {
+    text-align: right;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #7f8c8d;
+}
+
+/* Sections Styling */
+.info-section {
+    margin-bottom: 35px;
+}
+
+.info-section h3 {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #3498db;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Grid System for Info Items */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* عمودين متساويين */
+    gap: 20px 40px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #fafafa;
+    padding-bottom: 8px;
+}
+
+.info-item label {
+    font-size: 12px;
+    color: #95a5a6;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.info-item span {
+    font-size: 15px;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* Total Section */
+.total-section {
+    margin-top: 50px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.total-box {
+    background: #34495e;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 4px;
+    text-align: center;
+    min-width: 250px;
+}
+
+.total-box label {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.total-box span {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.status-confirmée { background: #e1f7ec; color: #27ae60; }
+.status-annulée { background: #fdeaea; color: #e74c3c; }
+
+/* Print Adjustment */
+@media print {
+    .sidebar, .navbar, .page-header, .add-btn { display: none !important; }
+    .details-card { box-shadow: none; border: none; width: 100%; margin: 0; padding: 20px; }
+}
+.icon-btn {
+    text-decoration: none; /* حيدي الخط اللي كيكون تحت الرابط */
+    display: inline-block;
+    padding: 5px 8px;
+    color: #3498db; /* لون العين أزرق مثلا */
+ } 
+
+ /* ================ Service Details Page Styling ============ */
+
+/* حاوية فريدة لهذه الصفحة لتجنب التعارض */
+.service-details-layout {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    max-width: 800px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: 250px 1fr; /* عمود ضيق للصورة، والباقي للمعلومات */
+    gap: 30px;
+    align-items: flex-start;
+    border-top: 4px solid var(--gold-text);
+}
+
+.service-image-container .service-main-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid var(--gold-text);
+}
+
+.service-info-content h2 {
+    text-align: left;
+    color: var(--gold-text);
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    padding-bottom: 10px;
+}
+
+/* هذا الكلاس سيعوض كل أكواد .style في JS */
+.service-info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+    color: var(--primary-brown);
+}
+
+.service-info-item i {
+    font-size: 1.2rem;
+    color: var(--gold-text);
+    width: 25px; /* لتوحيد المسافات */
+}
+
+.service-description {
+    margin-top: 20px;
+    padding-left: 40px; /* لتكون تحت الأيقونات */
+    color: #666;
+    line-height: 1.6;
+    font-style: italic;
+}
+/* ================ Reservation Details (Invoice) Styling ============ */
+
+/* حاوية فريدة لهذه الصفحة لتجنب التعارض */
+.invoice-layout {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    max-width: 900px;
+    margin: 20px auto;
+    border: 1px solid #e0e0e0;
+    color: #333;
+}
+
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--gold-text);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.invoice-brand h2 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--primary-brown);
+}
+
+.invoice-status-container {
+    margin-top: 8px;
+}
+
+.invoice-company-info {
+    text-align: right;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #7f8c8d;
+}
+
+.invoice-info-section {
+    margin-bottom: 30px;
+}
+
+.invoice-info-section h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    color: var(--gold-text);
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.invoice-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px 30px;
+}
+
+.invoice-info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.invoice-info-item label {
+    font-size: 13px;
+    color: #95a5a6;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.invoice-info-item span {
+    font-size: 15px;
+    color: var(--primary-brown);
+    font-weight: 500;
+}
+
+.invoice-total-section {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.invoice-total-box {
+    background: var(--dark-sidebar);
+    color: white;
+    padding: 25px 40px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 280px;
+}
+
+.invoice-total-box label {
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #d1bfa7;
+}
+
+.invoice-total-box span {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--gold-text);
+}
+/* ================ Personnel & Client Details Page Styling ============ */
+.personnel-details-card {
+    background: var(--white);
+    padding: 30px 40px; /* بادينغ أكثر من الجوانب */
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    max-width: 750px; /* يمكنك تعديل العرض كما تريد */
+    margin: 30px auto;
+}
+
+.staff-info-content h2 {
+    color: var(--primary-brown);
+    font-size: 2.2rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 2px solid var(--gold-text);
+    padding-bottom: 15px;
+}
+
+.staff-info-content .detail-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.staff-info-content .detail-label {
+    font-weight: bold;
+    color: var(--gold-text);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 180px; /* عرض ثابت لضمان محاذاة القيم */
+}
+
+.staff-info-content .detail-value {
+    color: var(--primary-brown);
+}
+
+.staff-info-content hr {
+    border: none;
+    border-top: 1px dashed rgba(197, 160, 89, 0.3);
+    margin: 25px 0;
+}

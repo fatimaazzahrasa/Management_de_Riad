@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gestion des Réservations</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+    <div class="main-layout" style="display: flex">
+      <div id="sidebar-container"></div>
+      <div class="content" id="content">
+        <main>
+          <div class="page-header">
+            <h1>Gestion des Réservations</h1>
+            <button class="add-btn" type="button" id="add-res-btn">
+              <i class="fa fa-plus"></i> Ajouter une réservation
+            </button>
+          </div>
+
+          <div class="search-container">
+            <i class="fa fa-search"></i>
+            <input
+              type="text"
+              id="searchRes"
+              placeholder="Rechercher par nom de client..."
+            />
+          </div>
+
+          <div class="table-responsive">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Chambre</th>
+                  <th>Date</th>
+                  <th>Prix Total</th>
+                  <th style="text-align: center">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reservationsTable"></tbody>
+            </table>
+          </div>
+
+          <div class="pagination-container">
+            <div class="pagination-controls" id="res-pagination-controls"></div>
+          </div>
+
+          <div id="formBoxRes" class="modal-form" style="display: none">
+            <div class="form-content">
+              <h3 id="formTitle">Détails de la Réservation</h3>
+
+              <label>Client</label>
+              <select id="resClient">
+                <option value="">-- Sélectionner un client --</option>
+              </select>
+
+              <label>Chambre (Disponibles uniquement)</label>
+              <select id="resRoom">
+                <option value="">-- Sélectionner une chambre --</option>
+              </select>
+
+              <label>Date d'Arrivée (Check-in)</label>
+              <input id="resCheckIn" type="date" />
+
+              <label>Date de Départ (Check-out)</label>
+              <input id="resCheckOut" type="date" />
+
+              <label>Prix Total (Calculé)</label>
+              <input
+                id="resPrice"
+                type="number"
+                readonly
+                placeholder="0.00 DH"
+                style="background: #eee"
+              />
+
+              <div class="form-actions">
+                <button class="save-btn" type="button" id="save-res-btn">
+                  Enregistrer
+                </button>
+                <button class="cancel-btn" type="button" id="cancel-res-btn">
+                  Annuler
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+        <div id="footer-container"></div>
+      </div>
+    </div>
+
+    <script src="assets/js/base.js" defer></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/reservations.js" defer></script>
+  </body>
+</html>

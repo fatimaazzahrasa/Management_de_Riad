@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services - Riad Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="main-layout">
+        <div id="sidebar-container"></div>
+
+        <div class="content">
+            <main>
+                <div class="page-header">
+                    <h1><i class="fa fa-concierge-bell"></i> Services du Riad</h1>
+                    <button class="add-btn" id="open-modal-btn">
+                        <i class="fa fa-plus"></i> Ajouter Service
+                    </button>
+                </div>
+
+                <div class="search-container">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="search-service" placeholder="Rechercher un service..." />
+                </div>
+
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Prix (DH)</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="services-table-body"></tbody>
+                    </table>
+                </div>
+
+                <div id="service-modal" class="modal-form">
+                    <div class="form-content">
+                        <h2 id="modal-title">Ajouter un Service</h2>
+                        <input type="hidden" id="service-id" />
+
+                        <div class="input-group">
+                            <label>Nom du Service</label>
+                            <input type="text" id="service-name" placeholder="Ex: Petit-déjeuner" />
+                        </div>
+
+                        <div class="input-group">
+                            <label>Prix (DH)</label>
+                            <input type="number" id="service-price" placeholder="0.00" />
+                        </div>
+
+                        <div class="input-group">
+                            <label>Statut</label>
+                            <select id="service-status">
+                                <option value="actif">Actif</option>
+                                <option value="inactif">Inactif</option>
+                            </select>
+                        </div>
+
+                        <div class="form-actions">
+                            <button id="save-service-btn" class="save-btn">Enregistrer</button>
+                            <button id="close-modal-btn" class="cancel-btn">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div id="footer-container"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/base.js" defer></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/services.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Détails du Membre</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- PDF Export Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <div class="main-layout" style="display: flex;">
+        <!-- Sidebar will be loaded here -->
+        <div id="sidebar-container"></div>
+        
+        <!-- Main Content Area -->
+        <div class="content" id="content">
+            <main>
+                <!-- ================= START: Page Header ================= -->
+                <div class="page-header">
+                    <h1 id="pageTitle">Détails du Membre</h1>
+                    <div>
+                        <a href="personnel.html" class="cancel-btn"><i class="fa fa-arrow-left"></i> Retour</a>
+                        <button class="add-btn" id="export-pdf-btn"><i class="fa fa-file-pdf"></i> Exporter PDF</button>
+                    </div>
+                </div>
+                <!-- ================= END: Page Header ================= -->
+
+                <!-- ================= START: Details Card ================= -->
+                <div class="personnel-details-card" id="details-container">
+                    <!-- Right Column for Info -->
+                    <div class="staff-info-content">
+                        <h2 id="staff-fullname">---</h2>
+                        <div class="detail-line">
+                            <span class="detail-label">Poste:</span>
+                            <span class="detail-value" id="det-poste">---</span>
+                        </div>
+                        <div class="detail-line">
+                            <span class="detail-label">Statut:</span>
+                            <span class="detail-value" id="det-statut">---</span>
+                        </div>
+                        <hr>
+                        <div class="detail-line">
+                            <span class="detail-label"><i class="fa fa-id-card"></i> CIN:</span>
+                            <span class="detail-value" id="det-cin">---</span>
+                        </div>
+                        <div class="detail-line">
+                            <span class="detail-label"><i class="fa fa-phone"></i> Téléphone:</span>
+                            <span class="detail-value" id="det-telephone">---</span>
+                        </div>
+                        <div class="detail-line">
+                            <span class="detail-label"><i class="fa fa-envelope"></i> Email:</span>
+                            <span class="detail-value" id="det-email">---</span>
+                        </div>
+                        <div class="detail-line">
+                            <span class="detail-label"><i class="fa fa-calendar-alt"></i> Date d'embauche:</span>
+                            <span class="detail-value" id="det-date">---</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- ================= END: Details Card ================= -->
+            </main>
+
+            <!-- Footer will be loaded here -->
+            <div id="footer-container"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/base.js" defer></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/personnel_details.js"></script>
+</body>
+</html>

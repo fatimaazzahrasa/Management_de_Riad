@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Détails du Client</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <div class="main-layout" style="display: flex;">
+        <div id="sidebar-container"></div>
+        <div class="content" id="content">
+            <main>
+                <!-- Header: Title and Buttons -->
+                <div class="page-header">
+                    <h1 id="pageTitle">Détails du Client</h1>
+                    <div>
+                        <a href="clients.html" class="cancel-btn"><i class="fa fa-arrow-left"></i> Retour</a>
+                        <button class="add-btn" id="export-pdf-btn"><i class="fa fa-file-pdf"></i> Exporter PDF</button>
+                    </div>
+                </div>
+
+                <!-- Details Card (using the same class as personnel for consistency) -->
+                <div class="personnel-details-card" id="details-container">
+                    <div class="staff-info-content">
+                        <h2 id="client-fullname">---</h2>
+                        <div class="detail-line">
+                            <span class="detail-label">Pays:</span>
+                            <span class="detail-value" id="det-pays">---</span>
+                        </div>
+                        <hr>
+                        <div class="detail-line">
+                            <span class="detail-label"><i class="fa fa-id-card"></i> CIN:</span>
+                            <span class="detail-value" id="det-cin">---</span>
+                        </div>
+                        <div class="detail-line">
+                            <span class="detail-label"><i class="fa fa-phone"></i> Téléphone:</span>
+                            <span class="detail-value" id="det-telephone">---</span>
+                        </div>
+                        <div class="detail-line">
+                            <span class="detail-label"><i class="fa fa-envelope"></i> Email:</span>
+                            <span class="detail-value" id="det-email">---</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div id="footer-container"></div>
+        </div>
+    </div>
+    <script src="assets/js/base.js" defer></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/client_details.js"></script>
+</body>
+</html>

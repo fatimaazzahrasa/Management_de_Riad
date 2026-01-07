@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Clients - Riad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <div class="main-layout">
+        <div id="sidebar-container"></div>
+        
+        <div class="content">
+            <main>
+                <div class="page-header">
+                    <h1>Gestion des Clients</h1>
+                    <button class="add-btn" id="add-client-btn">
+                        <i class="fa fa-user-plus"></i> Ajouter un client
+                    </button>
+                </div>
+
+                <div class="search-container">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="searchClient" placeholder="Rechercher un client (Nom أو Téléphone)...">
+                </div>
+
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Nom Complet</th>
+                                <th>Téléphone</th>
+                                <th>Email</th>
+                                <th style="text-align: center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientsTable">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination-container">
+                    <div id="client-pagination" class="pagination-controls"></div>
+                </div>
+            </main>
+
+            <div id="formBoxClient" class="modal-form" style="display:none;">
+                <div class="form-content">
+                    <h2 id="modalTitle">Nouveau Client</h2>
+                    <input type="hidden" id="edit-client-id">
+                    
+                    <label>Nom Complet</label>
+                    <input type="text" id="clientName" placeholder="Ex: Mohamed Alami">
+                    
+                    <label>Téléphone</label>
+                    <input type="text" id="clientPhone" placeholder="Ex: 0612345678">
+
+                    <label>Email</label>
+                    <input type="email" id="clientEmail" placeholder="Ex: client@mail.com">
+
+                    <div class="form-actions">
+                        <button class="save-btn" id="save-client-btn">Enregistrer</button>
+                        <button class="cancel-btn" id="cancel-client-btn">Annuler</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="footer-container"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/base.js" defer></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/clients.js" defer></script>
+</body>
+</html>
