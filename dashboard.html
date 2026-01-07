@@ -11,6 +11,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- chart.js -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div id="navbar-container"></div>
@@ -20,7 +22,109 @@
         
         <div class="content" id="content">
             <main>
-                <h1>Tableau de bord</h1>
+                <div class="page-header">
+                    <h1>Tableau de Bord</h1>
+                </div>
+
+                <!-- ================= START: KPI Cards Grid ================= -->
+                <div class="kpi-cards-grid">
+                    <!-- Card 1: Total des Revenus -->
+                    <div class="kpi-card">
+                        <div class="card-icon" style="background-color: #27ae6020;">
+                            <i class="fa fa-dollar-sign" style="color: #27ae60;"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Total des Revenus</span>
+                            <span class="card-value" id="kpi-total-revenue">0 DH</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Nombre de Réservations -->
+                    <div class="kpi-card">
+                        <div class="card-icon" style="background-color: #2980b920;">
+                            <i class="fa fa-calendar-check" style="color: #2980b9;"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Réservations</span>
+                            <span class="card-value" id="kpi-total-reservations">0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3: Nombre de Clients -->
+                    <div class="kpi-card">
+                        <div class="card-icon" style="background-color: #8e44ad20;">
+                            <i class="fa fa-users" style="color: #8e44ad;"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Clients Enregistrés</span>
+                            <span class="card-value" id="kpi-total-clients">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Chambres Disponibles -->
+                    <div class="kpi-card">
+                        <div class="card-icon" style="background-color: #f39c1220;">
+                            <i class="fa fa-bed" style="color: #f39c12;"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Chambres Disponibles</span>
+                            <span class="card-value" id="kpi-available-rooms">0 / 0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 5: Taux d'Occupation -->
+                    <div class="kpi-card">
+                        <div class="card-icon" style="background-color: #d3540020;">
+                            <i class="fa fa-chart-pie" style="color: #d35400;"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Taux d'Occupation</span>
+                            <span class="card-value" id="kpi-occupancy-rate">0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: Prix Moyen par Nuit -->
+                    <div class="kpi-card">
+                        <div class="card-icon" style="background-color: #c0392b20;">
+                            <i class="fa fa-tags" style="color: #c0392b;"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Prix Moyen / Nuit</span>
+                            <span class="card-value" id="kpi-avg-price">0 DH</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- ================= END: KPI Cards Grid ================= -->
+               
+                <div class="charts-grid">
+                    <!-- Chart 1: Statut des Chambres (Pie) -->
+                    <div class="chart-container">
+                        <h3>Statut des Chambres</h3>
+                        <canvas id="roomStatusChart"></canvas>
+                    </div>
+                    <!-- Chart 2: Revenus Mensuels (Bar) -->
+                    <div class="chart-container">
+                        <h3>Revenus Mensuels</h3>
+                        <canvas id="monthlyRevenueChart"></canvas>
+                    </div>
+                    <!-- Chart 3: Réservations par Type (Doughnut) -->
+                    <div class="chart-container">
+                        <h3>Réservations par Type</h3>
+                        <canvas id="roomTypeChart"></canvas>
+                    </div>
+                    <!-- Chart 4: Tendance des Réservations (Line) -->
+                    <div class="chart-container">
+                        <h3>Tendance (7 derniers jours)</h3>
+                        <canvas id="reservationsTrendChart"></canvas>
+                    </div>
+                    <!-- Chart 5: Répartition du Personnel (Polar Area) -->
+                    <div class="chart-container">
+                        <h3>Répartition du Personnel</h3>
+                        <canvas id="staffDistributionChart"></canvas>
+                    </div>
+                </div>
+                <!-- ================= END: Charts Grid ================= -->
+               
             </main>
             <div id="footer-container"></div>
         </div>

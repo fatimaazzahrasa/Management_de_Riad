@@ -1012,3 +1012,89 @@ footer .copy-right a {
     border-top: 1px dashed rgba(197, 160, 89, 0.3);
     margin: 25px 0;
 }
+/* ================ Dashboard Page Styling ============ */
+
+/* Grid for KPI Cards */
+.kpi-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.kpi-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.card-icon i {
+    font-size: 1.8rem;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.card-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-brown);
+}
+/* ================ Dashboard Charts Styling ============ */
+
+.charts-grid {
+    margin-top: 40px;
+    display: grid;
+    /* ✅ يعرض عمودين في الشاشات الكبيرة، وعمود واحد في الصغيرة */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+}
+
+
+.chart-container {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    
+    /* ✅ START: هذا هو الجزء المضاف */
+    position: relative; /* ضروري لكي يعمل Chart.js بشكل صحيح */
+    height: 400px; /* يمكنك تغيير هذا الارتفاع كما تريد */
+    /* ✅ END: نهاية الجزء المضاف */
+}
+
+
+.chart-container h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: var(--primary-brown);
+}
